@@ -1,14 +1,30 @@
 import React from 'react'
 
-const FilterTab = () => {
+type FilterType = "all" | "expense" | "income";
+interface FilterProps {
+  filter: FilterType;
+  setFilter: React.Dispatch<React.SetStateAction<FilterType>>;
+}
+const filters: FilterType[] = ["all", "expense", "income"];
+
+const FilterTab = ({ filter, setFilter }: FilterProps) => {
   return (
     <div className='p-8 border-b border-white/10'>
       <div className='flex space-x-2 bg-gray-800/50 rounded-2xl p-2'>
         {/* I will use logic */}
-        <div className='flex space-x-2 bg-gray-800/50 rounded-2xl p-2'>
-          {/* i will use map method */}
-          <button className={`flex-1 py-3 px-6 rounded-xl text-sm font-semibold capitalize transition-all duration-200`}>All</button>
-        </div>
+        {
+          filters.map((filtertype) => (
+            <button key={filtertype}
+              onClick={() => setFilter(filtertype)}
+              className={`flex-1 py-3 px-6 rounded-xl text-sm font-semibold capitalize transition-all duration-200 ${filter === filtertype
+                ? "bg-linear-to-r from-purple-600 to-pink-500 text-white shadow-lg"
+                : "text-gray-400 hover:text-white hover:bg-gray-700/50"
+                }`}
+            >
+              {filtertype === "all" ? "All Entries" : filtertype}
+            </button>
+          ))
+        }
       </div>
 
     </div>
@@ -16,3 +32,4 @@ const FilterTab = () => {
 }
 
 export default FilterTab
+
