@@ -1,19 +1,18 @@
-import { Wallet } from 'lucide-react'
+import { Compass } from 'lucide-react'
 import React from 'react'
 
 const Header = () => {
   return (
-    <div className='text-center mb-12'>
-      <div className='flex items-center justify-center mb-6'>
-        <div className='p-4 bg-linear-to-r from-emerald-500 to-blue-500 rounded-2xl shadow-lg'>
-          <Wallet className='w-12 h-12 text-white'/>
+    <div className='flex items-center justify-between mb-8 pb-6 border-b border-slate-200'>
+      <div className='flex items-center gap-3'>
+        <div className='p-2 bg-sky-600 rounded-lg'>
+          <Compass className='w-6 h-6 text-white'/>
         </div>
+        <h1 className='text-2xl font-bold text-slate-800 tracking-tight'></h1>
       </div>
-      <h1 className='text-5xl font-bold bg-linear-to-r from-emerald-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4'>MoneyFlow</h1>
-      <p className='text-gray-300 text-xl'>Master you finance with style</p>
+      <h1 className='text-slate-500 text-2xl font-bold'>Budget Tracker</h1>
     </div>
   )
 }
 
-export default Header
-
+export default Header;

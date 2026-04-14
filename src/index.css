@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+:root {
+  --bg-main: #f1f5f9;      
+  --card-bg: #ffffff;      
+  --text-primary: #1e293b; 
+  --text-secondary: #64748b;
+  
+  --brand-color: #0ea5e9; 
+  --success-color: #10b981;
+  --danger-color: #f43f5e;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.custom-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+}

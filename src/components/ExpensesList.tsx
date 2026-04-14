@@ -1,84 +1,54 @@
-import { Calendar, DollarSign, Edit2, Tag, Trash2, TrendingDown, TrendingUp } from 'lucide-react'
+import { Calendar, Layers, Edit3, Trash, MinusCircle, PlusCircle, SearchX } from 'lucide-react'
 import React from 'react'
-import type { Expense } from '../types/expense';
+import type { ExpensesListProps } from '../types/expense';
 
-
-interface ExpansesListProps {
-  filterExpenses: Expense[];
-  handleEdit: (expense: Expense) => void;
-  handleDelete: (id: number) => void;
-  
-}
-
-
-const ExpensesList = ({ filterExpenses, handleEdit, handleDelete }: ExpansesListProps) => {
+const ExpensesList = ({ filterExpenses, handleEdit, handleDelete }: ExpensesListProps) => {
   return (
-    <div className='p-8 max-h-96 overflow-y-auto'>
-      {
-        filterExpenses.length === 0 ? (<div className='text-center py-16'>
-          <div className='p-6 bg-linear-to-r from-purple-500/20 to-pink-500/20 rounded-3xl inline-block mb-6'>
-            <DollarSign className='w-16 h-16 text-purple-400' />
-          </div>
-          <p className='text-gray-300 text-xl mb-2'>No entries found</p>
-          <p className='text-gray-500'>Start by adding your first transaction</p>
-        </div>) : (
-          < div className='space-y-4'>
-            {
-              filterExpenses.map((exp) => (
-                <div key={exp.id} className='flex items-center justify-between p-6 bg-gray-800/30 rounded-2xl border border-gray-700/50 hover:bg-gray-800/50 hover:border-gray-600/50 transition-all duration-200'>
-                  <div className='flex items-center space-x-6'>
-                    <div className={`p-3 rounded-2xl ${exp.type === "income" ? "bg-emerald-500/20 text-emerald-400" : "bg-red-500/20 text-red-400"}`}>
-                      {/* Condtional Rendering */}
-                      {
-                        exp.type === "income" ? (<TrendingUp className='h-6 w-6' />) :
-                          (<TrendingDown className='h-6 w-6' />)
-                      }
-
-
-                    </div>
-                    <div>
-                      <p className='font-semibold text-white text-lg'>{exp.description}</p>
-                      <div className='flex items-center space-x-6 text-sm text-gray-400 mt-1'>
-                        <span className='flex items-center'>
-                          <Tag className='w-4 h-4 mr-2' />
-                          {exp.category}
-                        </span>
-                        <span className='flex items-center'>
-                          <Calendar className='w-4 h-4 mr-2' />
-                          {new Date(exp.date).toLocaleDateString("en-US", {
-                            year: "numeric",
-                            month: "short",
-                            day: "numeric",
-                          })}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='flex items-center space-x-4'>
-                    <span className={`font-bold text-2xl ${exp.type === "income" ? "text-emerald-400" : "text-red-400"}`}>
-                      {
-                        exp.type === "income" ? "+" : "-"
-                      } ${exp.amount.toFixed(2)}
+    <div className='p-6 max-h-[500px] overflow-y-auto'>
+      {filterExpenses.length === 0 ? (
+        <div className='text-center py-20 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200'>
+          <SearchX className='w-12 h-12 text-slate-300 mx-auto mb-4' />
+          <p className='text-slate-400 font-bold uppercase text-xs tracking-widest'>No records found</p>
+        </div>
+      ) : (
+        <div className='space-y-3'>
+          {filterExpenses.map((exp) => (
+            <div key={exp.id} className='group flex items-center justify-between p-4 bg-white rounded-xl border border-slate-100 hover:border-sky-200 hover:shadow-md transition-all'>
+              <div className='flex items-center space-x-4'>
+                <div className={`p-2 rounded-lg ${exp.type === "income" ? "text-emerald-600 bg-emerald-50" : "text-rose-600 bg-rose-50"}`}>
+                  {exp.type === "income" ? <PlusCircle className='h-5 w-5' /> : <MinusCircle className='h-5 w-5' />}
+                </div>
+                <div>
+                  <p className='font-bold text-slate-800 text-sm'>{exp.description}</p>
+                  <div className='flex items-center space-x-4 mt-1'>
+                    <span className='flex items-center text-[10px] text-slate-400 uppercase font-bold tracking-tight'>
+                      <Layers className='w-3 h-3 mr-1 text-sky-500' /> {exp.category}
                     </span>
-                    <div className='flex space-x-2'>
-                      <button className='p-3 text-gray-400 hover:text-blue-400 hover:bg-blue-500/20 rounded-xl transition-all duration-200' onClick={()=>handleEdit(exp)}>
-                        <Edit2 className='w-5 h-5' />
-                      </button>
-                      <button className='p-3 text-gray-400 hover:text-red-400 hover:bg-red-500/20 rounded-xl transition-all duration-200' onClick={()=>handleDelete(exp.id)}>
-                        <Trash2 className='w-5 h-5' />
-                      </button>
-                    </div>
+                    <span className='flex items-center text-[10px] text-slate-400 uppercase font-bold tracking-tight'>
+                      <Calendar className='w-3 h-3 mr-1 text-sky-500' /> {new Date(exp.date).toLocaleDateString()}
+                    </span>
                   </div>
                 </div>
-              ))
-            }
-          </div>
-        )
-      }
-
-
-
-    </div >
+              </div>
+              
+              <div className='flex items-center space-x-6'>
+                <span className={`font-mono font-bold text-lg ${exp.type === "income" ? "text-emerald-600" : "text-rose-600"}`}>
+                  {exp.type === "income" ? "+" : "-"}${exp.amount.toFixed(2)}
+                </span>
+                <div className='flex opacity-0 group-hover:opacity-100 transition-opacity'>
+                  <button onClick={()=>handleEdit(exp)} className='p-2 text-slate-400 hover:text-sky-600 transition-colors'>
+                    <Edit3 className='w-4 h-4' />
+                  </button>
+                  <button onClick={()=>handleDelete(exp.id)} className='p-2 text-slate-400 hover:text-rose-600 transition-colors'>
+                    <Trash className='w-4 h-4' />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   )
 }
 

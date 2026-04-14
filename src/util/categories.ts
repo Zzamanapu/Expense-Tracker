@@ -1,3 +1,5 @@
+//array of objects
+//object of arrays
 export const categories = {
   expense: [
     "Food and Dining",
@@ -20,3 +22,4 @@ export const categories = {
     "Other"
   ]
 }
+

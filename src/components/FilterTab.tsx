@@ -1,35 +1,27 @@
 import React from 'react'
+import type { FilterProps, FilterType } from '../types/expense'
 
-type FilterType = "all" | "expense" | "income";
-interface FilterProps {
-  filter: FilterType;
-  setFilter: React.Dispatch<React.SetStateAction<FilterType>>;
-}
 const filters: FilterType[] = ["all", "expense", "income"];
 
 const FilterTab = ({ filter, setFilter }: FilterProps) => {
   return (
-    <div className='p-8 border-b border-white/10'>
-      <div className='flex space-x-2 bg-gray-800/50 rounded-2xl p-2'>
-        {/* I will use logic */}
-        {
-          filters.map((filtertype) => (
-            <button key={filtertype}
-              onClick={() => setFilter(filtertype)}
-              className={`flex-1 py-3 px-6 rounded-xl text-sm font-semibold capitalize transition-all duration-200 ${filter === filtertype
-                ? "bg-linear-to-r from-purple-600 to-pink-500 text-white shadow-lg"
-                : "text-gray-400 hover:text-white hover:bg-gray-700/50"
-                }`}
-            >
-              {filtertype === "all" ? "All Entries" : filtertype}
-            </button>
-          ))
-        }
+    <div className='px-8 py-6 border-b border-slate-100 bg-slate-50/50'>
+      <div className='flex p-1 bg-slate-200/50 rounded-xl border border-slate-200'>
+        {filters.map((filtertype) => (
+          <button 
+            key={filtertype}
+            onClick={() => setFilter(filtertype)}
+            className={`flex-1 py-2 px-4 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all duration-300 ${filter === filtertype
+              ? "bg-white text-sky-600 shadow-sm border border-slate-200"
+              : "text-slate-500 hover:text-slate-700"
+            }`}
+          >
+            {filtertype === "all" ? "Full Ledger" : filtertype}
+          </button>
+        ))}
       </div>
-
     </div>
   )
 }
 
 export default FilterTab
-

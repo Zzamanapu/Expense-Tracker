@@ -1,57 +1,41 @@
-import { AlertCircle, Check, X } from 'lucide-react'
+import { Info, ShieldAlert, BadgeCheck, X } from 'lucide-react'
 import React from 'react'
-
-type ToastVariant  = "success" | "error" | "info";
-
-interface ToastType {
-  id: number;
-  message: string;
-  type: ToastVariant ;
-}
-
-interface ToastProps {
-  Toast: ToastType[];
-  RemoveToast: (id: number) => void;
-}
+import type { ToastProps } from '../types/expense'
 
 const Toast = ({ Toast, RemoveToast }: ToastProps) => {
   return (
-    // map method logic
-    <div className='fixed top-4 right-4 z-50 space-y-2'>
-      {
-        Toast.map((toast) => {
-          return (
-            <div key={toast.id} className={`flex items-center p-4 rounded-lg shadow-lg backdrop-blur-sm border transform transition-all duration-300 easy-in-out ${toast.type === "success" ? "bg-green-900/80 border-green-700 text-green-100" : toast.type === "error" ? "bg-red-900/80 border-red-700 text-red-100" : "bg-yellow-900/80 border-yellow-700 text-yellow-100"}`}>
+    <div className='fixed top-6 right-6 z-50 space-y-3 w-72'>
+      {Toast.map((toast) => (
+        <div 
+          key={toast.id} 
+          className={`flex items-start p-4 rounded-xl border shadow-lg backdrop-blur-md transition-all duration-300 ${
+            toast.type === "success" ? "bg-white border-emerald-200 text-emerald-800" : 
+            toast.type === "error" ? "bg-white border-rose-200 text-rose-800" : 
+            "bg-white border-sky-200 text-sky-800"
+          }`}
+        >
+          <div className='mt-0.5'>
+            {toast.type === "success" && <BadgeCheck className='w-4 h-4 mr-3 text-emerald-500' />}
+            {toast.type === "error" && <ShieldAlert className='w-4 h-4 mr-3 text-rose-500' />}
+            {toast.type === "info" && <Info className='w-4 h-4 mr-3 text-sky-500' />}
+          </div>
 
-              {/* conditional rendering */}
-              {
-                toast.type === "success" && < Check className='w-5 h-5 mr-2 shrink-0' />
-              }
+          <div className='flex-1'>
+            <p className='text-[11px] font-bold uppercase tracking-wider leading-tight'>
+              {toast.message}
+            </p>
+          </div>
 
-
-              {/* conditional rendering */}
-              {
-                toast.type === "error" && < AlertCircle className='w-5 h-5 mr-2 shrink-0' />
-              }
-
-              {/* conditional rendering */}
-                            {
-                toast.type === "info" && < AlertCircle className='w-5 h-5 mr-2 shrink-0' />
-              }
-
-              <span className='mr-2'>{toast.message}</span>
-              <button className='ml-auto text-gray-300 hover:text-white transition-colors' onClick={() => RemoveToast(toast.id)}>
-                <X className='w-4 h-4' />
-              </button>
-
-            </div >
-          )
-        })
-      }
+          <button 
+            onClick={() => RemoveToast(toast.id)} 
+            className='ml-2 text-slate-400 hover:text-slate-600 transition-colors'
+          >
+            <X className='w-3 h-3' />
+          </button>
+        </div>
+      ))}
     </div>
   )
 }
 
 export default Toast
-
-

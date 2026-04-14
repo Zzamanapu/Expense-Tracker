@@ -1,68 +1,39 @@
-import { DollarSign, TrendingDown, TrendingUp } from 'lucide-react'
+import { Wallet, ArrowUpCircle, ArrowDownCircle } from 'lucide-react'
 import React from 'react'
-
-interface SummaryCardProps {
-  totalIncome: number;
-  totalExpense: number;
-  balance: number;
-}
+import type { SummaryCardProps } from '../types/expense';
 
 const SummaryCard = ({ totalIncome, totalExpense, balance }: SummaryCardProps) => {
   return (
-    <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-12'>
-
-
-
-      <div className='bg-linear-to-r from-emerald-500/10 to-emerald-600/10 backdrop-blur-sm rounded-3xl p-8 border border-emerald-500/20 shadow-xl'>
-        <div className='flex items-center justify-between'>
+    <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8'>
+      {/* Earnings */}
+      <div className='bg-white p-6 rounded-xl border border-slate-200 shadow-sm'>
+        <div className='flex items-center gap-4'>
+          <ArrowUpCircle className='w-10 h-10 text-emerald-500' />
           <div>
-            <p className='text-emerald-300 text-sm font-medium uppercase tracking-wide'>Total Income</p>
-            <p className='text-4xl font-bold text-emerald-400 mt-2'>
-              ${totalIncome.toFixed(2)}
-            </p>
-          </div>
-          <div className='p-4 bg-emerald-500/20 rounded-2xl'>
-            <TrendingUp className='w-8 h-8 text-emerald-400' />
-
+            <p className='text-slate-500 text-xs font-bold uppercase'>Total Inflow</p>
+            <p className='text-2xl font-bold text-slate-800'>${totalIncome.toFixed(2)}</p>
           </div>
         </div>
       </div>
 
-
-
-
-      <div className='bg-linear-to-r from-red-500/10 to-red-600/10 backdrop-blur-sm rounded-3xl p-8 border border-red-500/20 shadow-xl'>
-        <div className='flex items-center justify-between'>
+      {/* Expenses */}
+      <div className='bg-white p-6 rounded-xl border border-slate-200 shadow-sm'>
+        <div className='flex items-center gap-4'>
+          <ArrowDownCircle className='w-10 h-10 text-rose-500' />
           <div>
-            <p className='text-red-300 text-sm font-medium uppercase tracking-wide'>
-              Total Expense
-            </p>
-            <p className='text-4xl font-bold text-red-400 mt-2'>
-              ${totalExpense.toFixed(2)}
-            </p>
-          </div>
-          <div className='p-4 bg-emerald-500/20 rounded-2xl'>
-            <TrendingDown className='w-8 h-8 text-red-400' />
-
+            <p className='text-slate-500 text-xs font-bold uppercase'>Total Outflow</p>
+            <p className='text-2xl font-bold text-slate-800'>${totalExpense.toFixed(2)}</p>
           </div>
         </div>
       </div>
 
-
-
-      {/* I will use logic to Render the Conditional Based Design */}
-      <div className={`bg-linear-to-r ${balance >= 0 ? "from-blue-500/10 to-blue-600/10 border-blue-500/20" : "from-orange-500/10 to-orange-600/10 border-orange-500/20"} backdrop-blur-sm rounded-3xl p-8 border shadow-xl`}>
-        <div className='flex items-center justify-between'>
+      {/* Net */}
+      <div className={`p-6 rounded-xl border shadow-sm ${balance >= 0 ? 'bg-sky-50 border-sky-200' : 'bg-amber-50 border-amber-200'}`}>
+        <div className='flex items-center gap-4'>
+          <Wallet className={`w-10 h-10 ${balance >= 0 ? 'text-sky-600' : 'text-amber-600'}`} />
           <div>
-            <p className={`${balance >= 0 ? "text-blue-300" : "text-orange-300"} text-sm font-medium uppercase tracking-wide`}>
-              Net Balance
-            </p>
-            <p className={`text-4xl font-bold text-red-400 mt-2`}>
-              ${Math.abs(balance).toFixed(2)}
-            </p>
-          </div>
-          <div className={`${balance >= 0 ? "bg-blue-500/20" : "bg-orange-500/20"} p-4 rounded-2xl `}>
-            <DollarSign className={` ${balance >= 0 ? "text-blue-400" : "text-orange-400"}`} />
+            <p className='text-slate-600 text-xs font-bold uppercase'>Available Funds</p>
+            <p className='text-2xl font-bold text-slate-800'>${Math.abs(balance).toFixed(2)}</p>
           </div>
         </div>
       </div>
@@ -70,4 +41,4 @@ const SummaryCard = ({ totalIncome, totalExpense, balance }: SummaryCardProps) =
   )
 }
 
-export default SummaryCard
+export default SummaryCard;
