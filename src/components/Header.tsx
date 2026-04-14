@@ -1,5 +1,4 @@
 import { Compass } from 'lucide-react'
-import React from 'react'
 
 const Header = () => {
   return (

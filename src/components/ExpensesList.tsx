@@ -1,5 +1,4 @@
 import { Calendar, Layers, Edit3, Trash, MinusCircle, PlusCircle, SearchX } from 'lucide-react'
-import React from 'react'
 import type { ExpensesListProps } from '../types/expense';
 
 const ExpensesList = ({ filterExpenses, handleEdit, handleDelete }: ExpensesListProps) => {

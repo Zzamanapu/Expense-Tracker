@@ -1,4 +1,3 @@
-import React from 'react'
 import type { FilterProps, FilterType } from '../types/expense'
 
 const filters: FilterType[] = ["all", "expense", "income"];

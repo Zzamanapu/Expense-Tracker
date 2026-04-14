@@ -1,5 +1,5 @@
 import { Plus, ArrowDownCircle, ArrowUpCircle } from 'lucide-react'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { categories } from '../util/categories';
 import type { AddExpensesFormProps, ExpenseType, FormErrors } from '../types/expense';
 

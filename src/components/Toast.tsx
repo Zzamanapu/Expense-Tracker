@@ -1,5 +1,4 @@
 import { Info, ShieldAlert, BadgeCheck, X } from 'lucide-react'
-import React from 'react'
 import type { ToastProps } from '../types/expense'
 
 const Toast = ({ Toast, RemoveToast }: ToastProps) => {

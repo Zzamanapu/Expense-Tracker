@@ -1,5 +1,4 @@
 import { Wallet, ArrowUpCircle, ArrowDownCircle } from 'lucide-react'
-import React from 'react'
 import type { SummaryCardProps } from '../types/expense';
 
 const SummaryCard = ({ totalIncome, totalExpense, balance }: SummaryCardProps) => {
